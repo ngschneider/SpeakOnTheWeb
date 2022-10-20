@@ -1,0 +1,9 @@
+####### Requirements list #######
+SpeechRecognition
+PyAudio
+pyttsx3/GTTS
+Playsound
+pywhatkit
+PyTorch
+nltk
+numpy
