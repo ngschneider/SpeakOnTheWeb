@@ -149,7 +149,8 @@ if __name__ == '__main__':
                 for intent in intents["intents"]:
                     if tag == intent["tag"]:
                         response = random.choice(intent["responses"])
-                        #ActionController.browserAction()
+                        
+                        ## ALL VOICE INPUT TO THIS COMMAND
                         browserAction(command)
                         """
                         if tag == "youtube":
