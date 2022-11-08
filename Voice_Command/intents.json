@@ -13,8 +13,8 @@
         "responses": ["playing,", "opening,"]
        },
     {"tag": "search",
-        "patterns": ["search", "find", "browse"],
-        "responses": ["I will search for you in google.", "Searching,"]
+        "patterns": ["search", "find", "browse","lookup", "look for"],
+        "responses": ["Searching,"]
     },
     {"tag": "calm-greet2",
         "patterns": ["how are you", "have you been", "hows your day"],
@@ -80,6 +80,47 @@
     {"tag": "noanswer",
      "patterns": [""],
      "responses": ["Sorry, can't understand you", "Please give me more info", "Not sure I understand"]
+    },
+    {"tag": "thanks",
+     "patterns": ["Thanks", "Thank you", "That's helpful", "Awesome, thanks", "Thanks for helping me"],
+     "responses": ["Happy to help!", "Any time!", "My pleasure"]
+    },
+    {"tag": "open_tab",
+     "patterns": ["open tab", "open new tab", "new tab"],
+     "responses": ["opening new tab"]
+    },
+    {"tag": "open_window",
+     "patterns": ["open window","open new window"],
+     "responses": ["opening new window,"]
+    },
+    {"tag": "close_window",
+     "patterns": ["close window","close current window"],
+     "responses": ["closing current window"]
+    },
+    {"tag": "close_tab",
+     "patterns": ["close tab","close current tab"],
+     "responses": ["closing current tab"]
+    },
+    {"tag": "goBack",
+     "patterns": ["go back","previous page"],
+     "responses": ["Okay"]
+    },
+    {"tag": "go_forward",
+     "patterns": ["go forward","next page"],
+     "responses": ["Okay"]
+    },
+    {"tag": "home",
+     "patterns": ["go home","homepage"],
+     "responses": ["Loading Homepage"]
+    },
+    {"tag": "reload",
+     "patterns": ["reload page","reload current page","refresh page"],
+     "responses": ["Reloading page"]
+    },
+    {"tag": "exit",
+     "patterns": ["exit","quit", "bye"],
+     "responses": ["Quitting"]
     }
+    
 ]
 }
