@@ -10,3 +10,8 @@ FILE NAME : ProjectSatusReprt3.mp4\
 Fully itergrated voice recognition and browser controls together
 Implemented a few working Actions; URL navigation, Back, and Refresh
 
+# Project: Status Report 4 notes : 
+FILE NAME : Milestone3.mp4\
+Program is no longer always listening to you. Similar to alexa or google home
+Searching within a website is working, (must know element id's)
+
