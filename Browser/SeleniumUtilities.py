@@ -11,7 +11,25 @@ def openBrowswer():
     global driver
     driver = webdriver.Chrome(PATH)
 
+def getSite():
+    return driver.current_url
 
+def selectElement(elementName, ElementType):
+    global currentElement
+    match ElementType:
+        case "ID":
+            currentElement = driver.find_element(By.ID, elementName)
+        case "NAME":
+            currentElement = driver.find_element(By.NAME, elementName)
+        case 'CLASS':
+            currentElement = driver.find_element(By.CLASS_NAME, elementName)
+            
+def sendKeys(text:str):
+    currentElement.send_keys(text)
+    
+def clickButton():
+    currentElement.click()
+    
 def openSite(URL):
     driver.get(URL)
     
