@@ -91,11 +91,11 @@ if __name__ == '__main__':
     
     print(os.getcwd())
     #read from json data for getting responses based on asked questions
-    with open('Voice_Command/intents.json', 'r') as json_data:
+    with open('SpeakOnTheWeb/Voice_Command/intents.json', 'r') as json_data:
        intents = json.load(json_data) 
 
     #File contains model trained
-    FILE = "Voice_Command/data.pth"
+    FILE = "SpeakOnTheWeb/Voice_Command/data.pth"
     data = torch.load(FILE)
 
     input_size = data["input_size"]
@@ -127,6 +127,11 @@ if __name__ == '__main__':
         # seconds. 
         elif 'exit' in command or 'go away' in command:
             break
+        elif 'pause' in command:
+            speak("Stoped Listening")
+            print("NO LONGER LISTENING")
+            f1 = False
+            
         elif f1:
             #convert command into a tokenized array
             command = tokenize(command)
