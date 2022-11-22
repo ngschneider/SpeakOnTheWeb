@@ -91,11 +91,11 @@ if __name__ == '__main__':
     
     print(os.getcwd())
     #read from json data for getting responses based on asked questions
-    with open('SpeakOnTheWeb\Voice_Command\intents.json', 'r') as json_data:
+    with open('Voice_Command/intents.json', 'r') as json_data:
        intents = json.load(json_data) 
 
     #File contains model trained
-    FILE = "SpeakOnTheWeb\Voice_Command\data.pth"
+    FILE = "Voice_Command/data.pth"
     data = torch.load(FILE)
 
     input_size = data["input_size"]
@@ -109,14 +109,16 @@ if __name__ == '__main__':
     model = NeuralNet(input_size, hidden_size, output_size).to(device)
     model.load_state_dict(model_state)
     model.eval()
-
+    
+    f1 = False
+    #listening starts here
+    #readFromFile()
     
     #listening starts here
     #readFromFile()
     while True:
         command = startListening()
-        
-        if "browser" in command:
+        if "hey browser" in command:
             speak("Listening...")
             f1 = True
         # After activating the listener the browser will continue
