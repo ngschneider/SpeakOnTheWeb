@@ -161,13 +161,16 @@ def assistantController():
             myFile.close()
             break
 
-        elif 'pause' in command:
+        elif 'pause' in command or 'stop listening' in command:
             speak("Stoped Listening")
             addReply('No longer listening')
+            myFile = open('savedStates/listenerState.txt', 'w')
+            myFile.write('1')
+            myFile.close()
             f1 = False
         
         elif 'dark mode' in command or 'light mode' in command or 'change mode' in command:
-            with open('savedStates/savedState.txt') as f:
+            with open('savedStates/screenMode.txt') as f:
                 lines = f.readlines()
             if lines[0] == '0':
                 bGround = 'w'
@@ -219,8 +222,13 @@ def assistantController():
                 for intent in intents["intents"]:
                     if tag == intent["tag"]:
                         response = random.choice(intent["responses"])
-                        ## ALL VOICE INPUT TO THIS COMMAND
-                        browserAction(command)
+                        if tag == "noanswer" or tag == "greet" or tag == "random" or tag=="thanks":
+                            addReply(response)
+                            speak(response)
+                        else:
+                        #     # ALL VOICE INPUT TO THIS COMMAND
+                            browserAction(command)
+                        break
                         
             else:
                 tag = "noanswer"

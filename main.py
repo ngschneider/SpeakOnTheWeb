@@ -15,6 +15,10 @@ def window():
     myFile = open('savedStates/processEnd.txt', 'w')
     myFile.write('0')
     myFile.close()
+
+    myFile = open('savedStates/listenerState.txt', 'w')
+    myFile.write('0')
+    myFile.close()
    
     app = QApplication(sys.argv)
     win = MyWindow(bGround)

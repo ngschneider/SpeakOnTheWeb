@@ -3,22 +3,24 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QPixmap
 from PyQt5 import QtCore as core 
 import sys
+import random
 
 class MyWindow(QMainWindow):
     def __init__(self, bGround):
         super(MyWindow, self).__init__()
-        self.setGeometry(10, 20, 300, 400)
+        self.setGeometry(10, 0, 300, 400)
         self.setFixedWidth(300)
-        self.setWindowTitle("Browsie")
-        self.initUI(bGround)    
-
-        timer = core.QTimer()
-        timer.timeout.connect(self.displayHistory)
-        timer.start(3000)    
-
+        self.setWindowTitle("Browsie") 
+        self.initUI(bGround)   
+    
     def initUI(self,bGround):
+        self.unresponsive = QtWidgets.QLabel(self)
+        self.unresponsive.setText("          ")
+        self.unresponsive.move(220,30)
+        self.unresponsive.mousePressEvent = self.unresponsiveBtn
+         
         self.label = QtWidgets.QLabel(self)
-        self.label.setText("Listening...")
+        self.flash()
         self.label.setStyleSheet("color: black")
         self.label.move(110,110)
         self.label.adjustSize()
@@ -79,7 +81,7 @@ class MyWindow(QMainWindow):
         self.displayLabel2.setStyleSheet("color:white;")
         self.displayLabel2.move(30,150)
         
-        # All stuf for window
+        # All stuff for window
         if bGround == 'w':
             self.setStyleSheet("background-color: #d9d9d9;")
             self.label.setHidden(False)
@@ -107,40 +109,53 @@ class MyWindow(QMainWindow):
             self.displayLabel2.setHidden(False) 
 
         self.displayHistory()
-        # self.timer = core.QTimer(self)
-        # self.timer.setInterval(5000)          
-        # self.timer.timeout.connect(self.displayHistory)
-        
-    @core.pyqtSlot()
-    def update(self):
-        with open('savedStates/processEnd.txt') as f:
-            lines = f.readlines()
-        if lines[0] == '1':
-            sys.exit(self.app.exec_())
+        self.endDisplay()
 
+    def unresponsiveBtn(self, event):
         with open('savedStates/screenMode.txt') as f:
             lines = f.readlines()
         if lines[0] == '0':
             bGround = 'w'
         else:
             bGround = 'd'
+
         self.initUI(bGround)
 
 
+    
+    def flash(self):
+        c = random.choice([0,1])
 
-    def darkMode(self,event):
+        with open('savedStates/listenerState.txt') as f:
+            lines = f.readlines()
+        if lines[0] == '1':
+            if c == 1:
+                self.label.setText("PAUSED")
+            else:
+                self.label.setText("Say Hey Browser to Start.")
+        
+        else:
+            if c == 1:
+                self.label.setText("Listening...")
+            else:
+                self.label.setText("I am here...")
+
+
+
+    def endDisplay(self):
         with open('savedStates/processEnd.txt') as f:
             lines = f.readlines()
         if lines[0] == '1':
-            sys.exit(self.app.exec_())
+            quit()
 
+
+    def darkMode(self,event):
         with open('savedStates/screenMode.txt') as f:
             lines = f.readlines()
         if lines[0] == '0':
             bGround = 'w'
         else:
             bGround = 'd'
-        
         myFile = open('savedStates/screenMode.txt', 'w')
         if bGround == 'w':
             myFile.write('1')
@@ -152,7 +167,8 @@ class MyWindow(QMainWindow):
         
         self.initUI(bG)
 
-    def displayHistory(self):
+    @core.pyqtSlot()
+    def displayHistory(self):      
         with open('savedStates/commands.txt') as f:
             linesC = f.readlines()
         with open('savedStates/reply.txt') as f:
@@ -165,10 +181,18 @@ class MyWindow(QMainWindow):
         while index < (len(linesC)+len(linesR)):
             if index%2 == 0:
                 if i2 < len(linesC):
-                    line+= ("User: "+linesC[i2])
+                    line+= "User: "
+                    curr = linesC[i2]
+                    n = 33 # chunk length
+                    chunks = [curr[i:i+n] for i in range(0, len(curr), n)]
+                    for val in chunks:
+                        line+= val
+                        if not val.endswith('\n'):
+                            line+= '\n'
+                    
+                    i2+=1
                     if i2 == len(linesC) - 1:
                         line+="\n"
-                    i2+=1
             else:
                 if i3 < len(linesR):
                     line+= "Browsie: "
@@ -184,7 +208,7 @@ class MyWindow(QMainWindow):
                         line+= "\n"
             line+='------------------------------------------\n'
             index+=1
-        
+
         self.displayLabel1.setText(line)
         self.displayLabel1.adjustSize()
         self.displayLabel2.setText(line)
