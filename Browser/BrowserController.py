@@ -16,6 +16,9 @@ actions = ["LOGIN", "SEARCH", "REFRESH", "Back", "OPEN"]
 # DICTIONARY OF RELATED WORDS TO A PARTICULAR ACTION
 keyWords = {
     "login" : "LOGIN",
+    "tab": "TAB",
+    "goto" : "WEBSITE",
+    'forward': "FOWARD",
     "sign in" : "LOGIN",
     "reload" : "REFRESH",
     "refresh" : "REFRESH",
@@ -67,9 +70,19 @@ def browserAction(command: list):
             # SELECT THE BUTTON & CLICK
             selUtil.selectElement(status[2][3],status[2][2])
             selUtil.clickButton()
+    elif intendedAction == 'TAB':
+        selUtil.selectElement("body", 'TAG')
+        selUtil.newTab()
+        selUtil.getWebDriver().switch_to.new_window('tab')
         
+        pass
+    
     elif intendedAction == 'BACK':
         selUtil.navBack()
+        pass
+    
+    elif intendedAction == 'Forward':
+        selUtil.navForward()
         pass
     elif intendedAction == 'REFRESH':
         selUtil.refreshPage()

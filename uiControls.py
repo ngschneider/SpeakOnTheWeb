@@ -7,7 +7,7 @@ import sys
 class MyWindow(QMainWindow):
     def __init__(self, bGround):
         super(MyWindow, self).__init__()
-        self.setGeometry(10, 0, 300, 400)
+        self.setGeometry(10, 20, 300, 400)
         self.setFixedWidth(300)
         self.setWindowTitle("Browsie")
         self.initUI(bGround)    

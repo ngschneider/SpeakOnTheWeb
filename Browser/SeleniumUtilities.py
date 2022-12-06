@@ -23,9 +23,17 @@ def selectElement(elementName, ElementType):
             currentElement = driver.find_element(By.NAME, elementName)
         case 'CLASS':
             currentElement = driver.find_element(By.CLASS_NAME, elementName)
+        case 'TAG':
+            currentElement = driver.find_element(By.TAG_NAME, elementName)
             
 def sendKeys(text:str):
     currentElement.send_keys(text)
+
+def newTab():
+    currentElement.send_keys(Keys.CONTROL + "t")
+    pass
+def sendControl():
+    currentElement.send_keys(Keys.CONTROL)
     
 def clickButton():
     currentElement.click()
@@ -39,6 +47,9 @@ def refreshPage():
     
 def navBack():
     driver.back()
+
+def navForward():
+    driver.forward()
 
 def getWebDriver():
     return driver

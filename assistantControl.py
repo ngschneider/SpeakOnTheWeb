@@ -219,13 +219,9 @@ def assistantController():
                 for intent in intents["intents"]:
                     if tag == intent["tag"]:
                         response = random.choice(intent["responses"])
-                        if tag == "noanswer" or tag == "greet" or tag == "random" or tag=="thanks":
-                            addReply(response)
-                            speak(response)
-                        else:
-                            ## ALL VOICE INPUT TO THIS COMMAND
-                            browserAction(command)
-                        break
+                        ## ALL VOICE INPUT TO THIS COMMAND
+                        browserAction(command)
+                        
             else:
                 tag = "noanswer"
                 for intent in intents["intents"]:
