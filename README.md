@@ -27,5 +27,5 @@
     -  Shows application and human interaction through proper texts on periodic UI refresh
     -  Added creating new tabs
     -  added navigation foward
-    -  add and improved command names
+    -  added and improved command names
     
