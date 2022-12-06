@@ -13,7 +13,7 @@ import json
 import os
 from Voice_Command.training.model import NeuralNet
 from Voice_Command.training.nltkutilities import tokenize, bag_of_words
-# from Browser.BrowserController import browserAction
+from Browser.BrowserController import browserAction
 # from userinterface import *
 #checking import
 
@@ -222,9 +222,9 @@ def assistantController():
                         if tag == "noanswer" or tag == "greet" or tag == "random" or tag=="thanks":
                             addReply(response)
                             speak(response)
-                        # else:
+                        else:
                             ## ALL VOICE INPUT TO THIS COMMAND
-                            # browserAction(command)
+                            browserAction(command)
                         break
             else:
                 tag = "noanswer"
